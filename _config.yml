@@ -1,0 +1,11 @@
+title: Justin Tahai — Systems Notes
+description: Static-first systems, checklists, and durable engineering notes.
+theme: minima
+markdown: kramdown
+permalink: pretty
+minima:
+  skin: dark
+header_pages:
+  - why-static-first.md
+  - checklists/static-launch-checklist.md
+  - about.md

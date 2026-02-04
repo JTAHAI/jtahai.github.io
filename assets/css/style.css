@@ -1,0 +1,39 @@
+
+:root{
+  --accent:#59cbd6;
+  --accent2:#2aa9b6;
+}
+
+a{ color: var(--accent); }
+a:hover{ color: var(--accent2); }
+
+.cta-row{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin: 18px 0 10px;
+}
+
+.btn{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius: 999px;
+  border:1px solid rgba(89,203,214,.35);
+  background: rgba(15,26,46,.55);
+  text-decoration:none;
+  font-weight:700;
+}
+
+.btn:hover{
+  border-color: rgba(89,203,214,.7);
+  background: rgba(15,26,46,.8);
+}
+
+.btn-ghost{
+  border-color: rgba(255,255,255,.14);
+  color: rgba(255,255,255,.9);
+}
+
+.btn-ghost:hover{
+  border-color: rgba(255,255,255,.28);
+}
