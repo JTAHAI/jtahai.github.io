@@ -1,10 +1,14 @@
-# jtahai.github.io (recommended)
+## About this site
 
-This repo hosts my GitHub Pages site: systems notes, checklists, and short essays on durable, accessible, static-first engineering.
+This repository powers **https://jtahai.github.io** — a static-first notebook where I write about:
 
-Right now, GitHub is publishing this as a **project site**, which produces a URL like:
+- Durable system design
+- Accessibility as a default
+- Performance without tricks
+- Security via reduced attack surface
+- Clean handoff and long-term maintainability
 
-```
-https://jtahai.github.io
+It complements my primary profile site at  
+👉 https://justintahai.jtforme.com
 
-
+That site provides broader professional and civic context; this one stays intentionally technical and documentation-focused.
