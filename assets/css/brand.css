@@ -1,0 +1,153 @@
+:root{
+  --bg: #061423;
+  --panel: #0b2236;
+  --text: #eaf3fa;
+  --muted: #a9c0d3;
+  --line: rgba(255,255,255,0.10);
+  --accent: #2fd1d1;
+  --accent2: #3b82f6;
+}
+
+/* Base */
+body{
+  background: radial-gradient(1200px 700px at 20% 10%, rgba(47,209,209,0.16), transparent 60%),
+              radial-gradient(900px 600px at 80% 30%, rgba(59,130,246,0.12), transparent 65%),
+              var(--bg) !important;
+  color: var(--text) !important;
+}
+
+/* Keep content readable */
+.wrapper, .page-content{
+  max-width: 980px;
+}
+
+/* Header */
+.site-header{
+  background: rgba(6,20,35,0.8) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line) !important;
+}
+
+.site-title{
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.site-title::before{
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+  vertical-align: -6px;
+  background: url("../img/jt-monogram.png") center / contain no-repeat;
+  border-radius: 6px;
+}
+
+.site-nav .page-link{
+  color: var(--muted) !important;
+}
+.site-nav .page-link:hover{
+  color: var(--text) !important;
+  text-decoration: none;
+}
+
+/* Links */
+a{ color: var(--accent) !important; }
+a:hover{ filter: brightness(1.08); }
+
+/* Cards / callouts */
+.post-content blockquote,
+.note,
+.callout{
+  background: rgba(11,34,54,0.65);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+/* Code */
+pre, code{
+  background: rgba(0,0,0,0.25) !important;
+  border-radius: 10px;
+}
+pre{
+  border: 1px solid var(--line) !important;
+}
+
+/* Footer */
+.site-footer{
+  border-top: 1px solid var(--line) !important;
+  background: rgba(6,20,35,0.65);
+}
+.footer-col-wrapper{ color: var(--muted) !important; }
+
+.footer-grid{
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 18px;
+  padding: 24px 0 10px;
+}
+.footer-brand{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.footer-title{ font-weight: 700; color: var(--text); }
+.footer-sub{ color: var(--muted); font-size: 0.95rem; }
+.footer-links{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.footer-links a{ color: var(--muted) !important; }
+.footer-links a:hover{ color: var(--accent) !important; }
+.footer-fineprint{
+  color: rgba(233,242,250,0.65);
+  font-size: 0.9rem;
+  padding: 10px 0 24px;
+}
+
+/* Aliases for older markup */
+.footer-list{ list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.footer-list a{ color: var(--muted) !important; }
+.footer-list a:hover{ color: var(--accent) !important; }
+.footer-bottom{ border-top: 1px solid var(--line); padding: 12px 0 24px; }
+
+@media (max-width: 700px){
+  .footer-grid{ grid-template-columns: 1fr; }
+}
+
+/* Tables */
+table{
+  border: 1px solid var(--line);
+}
+th, td{
+  border: 1px solid var(--line);
+}
+
+/* Small helper class you can use in markdown */
+.badge-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(11,34,54,0.55);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Class aliases for older markup */
+.footer-list{ list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.footer-list li{ margin: 0; }
+.footer-bottom{ color: rgba(233,242,250,0.65); font-size: 13px; border-top: 1px solid var(--line); padding: 12px 0 24px; }

@@ -3,8 +3,25 @@ description: Static-first systems, checklists, and durable engineering notes.
 theme: minima
 markdown: kramdown
 permalink: pretty
+
+# --- Canonical URL (important for SEO + sitemap) ---
+# If you rename the repo to jtahai.github.io (recommended), your site becomes:
+# https://jtahai.github.io/
+url: "https://jtahai.github.io"
+baseurl: ""
+
+# Minima options
 minima:
   skin: dark
+
+# Plugins supported by GitHub Pages
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Social links (used by minima)
+github_username: JTAHAI
+linkedin_username: justintahai
 header_pages:
   - why-static-first.md
   - checklists/static-launch-checklist.md
