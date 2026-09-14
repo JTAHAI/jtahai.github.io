@@ -1,0 +1,16 @@
+{
+  "name": "jtahai-github-io",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "astro": "^7.3.2",
+    "typescript": "^5.9.3"
+  }
+}

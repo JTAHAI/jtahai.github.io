@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { projects, notes, routes } from '../data/content';
+---
+<BaseLayout description="Justin Tahai is an IT Engineer and Web Developer who builds durable web experiences, operational software, and the systems behind them.">
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Independent technical portfolio · September 2026</span>
+      <h1>Justin<br /><em>Tahai</em></h1>
+      <p class="hero-lede"><strong>IT Engineer · Web Developer · Builder</strong><br />I build the systems behind the experience: public web, operational software, and the decisions that make each one hold up in real use.</p>
+      <div class="actions"><a class="button" href="/work/">Explore the work</a><a class="button secondary" href="/about/#contact">Talk about a project</a></div>
+    </div>
+    <div class="blueprint" aria-label="An illustrative blueprint of the portfolio's experience, structure, and evidence views">
+      <div class="blueprint-mark" aria-hidden="true">JT</div>
+      <div data-view>
+        <button aria-pressed="true" data-view-button="experience">Experience</button><button aria-pressed="false" data-view-button="structure">Structure</button><button aria-pressed="false" data-view-button="evidence">Evidence</button>
+      </div>
+      <p class="blueprint-copy" data-view-copy><strong>Experience.</strong> Clear routes, readable content, and responsive interfaces give useful work a place to land.</p>
+    </div>
+  </section>
+  <section class="band" aria-labelledby="selected-work">
+    <div class="band-head"><div><span class="eyebrow">Selected work</span><h2 id="selected-work">Built around the real constraint.</h2></div><p>Eight public work records. Each links to its own context, evidence, and boundaries.</p></div>
+    <div class="project-grid">{projects.map((project, i) => <a class="project-card" href={`/work/${project.slug}/`}><span class="project-no">0{i + 1} · {project.eyebrow}</span><div><h3>{project.title}</h3><p>{project.summary}</p></div><div>{project.tags.slice(0, 3).map(tag => <span class="tag">#{tag}</span>)}</div></a>)}</div>
+  </section>
+  <section class="band" aria-labelledby="system-map">
+    <div class="band-head"><div><span class="eyebrow">Living system map</span><h2 id="system-map">Work has context.</h2></div><p>This is an explanatory map of public work, not a live operations console.</p></div>
+    <div class="map"><div class="map-list" data-map-list>{projects.slice(0, 5).map((project, i) => <button data-map-item={i} aria-pressed={i === 0 ? 'true' : 'false'}><strong>{project.title}</strong><small>{project.business}</small></button>)}</div><div class="map-card"><span class="eyebrow" data-map-eyebrow>{projects[0].eyebrow}</span><h3 data-map-title>{projects[0].title}</h3><p data-map-summary>{projects[0].summary}</p><p><a data-map-link href={`/work/${projects[0].slug}/`}>Open the evidence record →</a></p></div></div>
+  </section>
+  <section class="band" aria-labelledby="notes">
+    <div class="band-head"><div><span class="eyebrow">Systems notes</span><h2 id="notes">Field notes for durable delivery.</h2></div><a href="/notes/">Read all notes →</a></div>
+    <div class="two-up">{notes.slice(0, 4).map(note => <a class="note-card" href={`/notes/${note.slug}/`}><time datetime={note.date}>{note.date}</time><h3>{note.title}</h3><p>{note.deck}</p></a>)}</div>
+  </section>
+  <section class="band" aria-labelledby="routes"><div class="band-head"><div><span class="eyebrow">Clear boundaries</span><h2 id="routes">One person. Distinct contexts.</h2></div><p>The portfolio is personal. Business and civic work retain their own purpose and ownership.</p></div><div class="two-up">{routes.map(route => <article class="route-card"><div><span class="eyebrow">{route.detail}</span><h3>{route.label}</h3></div><a href={route.href}>{route.href.replace('https://','')} →</a></article>)}</div></section>
+  <script is:inline define:vars={{ projects }}>
+    // @ts-nocheck
+    const views = { experience: '<strong>Experience.</strong> Clear routes, readable content, and responsive interfaces give useful work a place to land.', structure: '<strong>Structure.</strong> Delivery, domain, source, and runtime need a precise relationship before a launch is dependable.', evidence: '<strong>Evidence.</strong> Public artifacts explain what is known, while private operations stay private.' };
+    document.querySelectorAll('[data-view-button]').forEach(button => button.addEventListener('click', () => { document.querySelectorAll('[data-view-button]').forEach(item => item.setAttribute('aria-pressed', String(item === button))); document.querySelector('[data-view-copy]').innerHTML = views[button.dataset.viewButton]; }));
+    const mapItems = document.querySelectorAll('[data-map-item]'); mapItems.forEach(button => button.addEventListener('click', () => { const p = projects[Number(button.dataset.mapItem)]; mapItems.forEach(item => item.setAttribute('aria-pressed', String(item === button))); document.querySelector('[data-map-eyebrow]').textContent = p.eyebrow; document.querySelector('[data-map-title]').textContent = p.title; document.querySelector('[data-map-summary]').textContent = p.summary; document.querySelector('[data-map-link]').href = `/work/${p.slug}/`; }));
+  </script>
+</BaseLayout>

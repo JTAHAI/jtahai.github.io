@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; import { projects } from '../../data/content';
+export function getStaticPaths() { return projects.map(project => ({ params: { slug: project.slug }, props: { project } })); }
+const { project } = Astro.props;
+---
+<BaseLayout title={`${project.title} — Justin Tahai`} description={project.summary}><section class="case-hero"><div><span class="eyebrow">{project.eyebrow} · {project.status}</span><h1>{project.title}</h1><p class="hero-lede">{project.summary}</p>{project.live && <a class="button" href={project.live}>Visit public surface ↗</a>}</div><dl class="case-meta"><dt>Business context</dt><dd>{project.business}</dd><dt>Status</dt><dd>{project.status}</dd><dt>Evidence type</dt><dd>Public artifact and documented design context</dd></dl></section><article class="prose"><h2>The constraint</h2><p>{project.challenge}</p><h2>The approach</h2><p>{project.approach}</p><h2>Evidence and limits</h2><p>{project.evidence}</p><h2>What this record does not claim</h2><p>This portfolio case does not claim private infrastructure control, customer outcomes, availability guarantees, or access to accounts. It links to public material and describes only the design and delivery reasoning documented here.</p><p><a href="/work/">← Back to selected work</a></p></article></BaseLayout>

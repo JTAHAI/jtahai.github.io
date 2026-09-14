@@ -19,8 +19,8 @@ This isn’t ideology. It’s a maintenance strategy.
 ---
 
 ## Start here (two links)
-- Personal hub: **https://justintahai.pages.dev**
-- Services: **https://tahai.jtforme.com**
+- Personal hub: [justintahai.jtforme.com](https://justintahai.jtforme.com/)
+- Services: [tahai.net](https://tahai.net/)
 
 ---
 

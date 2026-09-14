@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+const { title = 'Justin Tahai — IT Engineer & Web Developer', description = 'A technical portfolio by Justin Tahai.', image = '/social-card.svg' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#07101e" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Justin Tahai home"><span class="brand-mark">JT</span><span>Justin Tahai</span></a>
+      <nav aria-label="Primary navigation">
+        <a href="/work/">Work</a><a href="/notes/">Notes</a><a href="/labs/">Labs</a><a href="/about/">About</a>
+      </nav>
+      <button class="search-trigger" data-search-open aria-haspopup="dialog">Search <kbd>⌘K</kbd></button>
+    </header>
+    <main id="content"><slot /></main>
+    <footer class="site-footer">
+      <div><span class="brand-mark">JT</span><strong> Justin Tahai</strong><p>IT Engineer · Web Developer · Builder</p></div>
+      <div><p>MAINELY CODE LLC is the company behind its product work. TAHAI Web Services is Justin Tahai’s personal DBA.</p><a href="https://tahai.net/">TAHAI Web Services</a> · <a href="https://mainelycode.com/">MAINELY CODE LLC</a></div>
+      <div><a href="https://github.com/JTAHAI">GitHub</a><br /><a href="https://www.linkedin.com/in/justintahai/">LinkedIn</a></div>
+    </footer>
+    <dialog class="search-dialog" data-search-dialog aria-label="Search this site">
+      <form method="dialog"><button class="dialog-close" aria-label="Close search">×</button></form>
+      <label for="site-search">Search work, notes, and labs</label>
+      <input id="site-search" data-search-input type="search" placeholder="Try ‘responsive’" autocomplete="off" />
+      <ul data-search-results></ul>
+    </dialog>
+    <script>
+      // @ts-nocheck
+      import { projects, notes } from '../data/content';
+      const dialog = document.querySelector('[data-search-dialog]');
+      const opener = document.querySelector('[data-search-open]');
+      const input = document.querySelector('[data-search-input]');
+      const results = document.querySelector('[data-search-results]');
+      const entries = [...projects.map(p => ({title:p.title, text:`${p.summary} ${p.tags.join(' ')}`, href:`/work/${p.slug}/`})), ...notes.map(n => ({title:n.title, text:n.deck, href:`/notes/${n.slug}/`})), {title:'Labs', text:'Request path responsive workbench launch checklist', href:'/labs/'}];
+      const render = () => { const q = input?.value.toLowerCase().trim() || ''; const found = q ? entries.filter(e => `${e.title} ${e.text}`.toLowerCase().includes(q)).slice(0,7) : entries.slice(0,5); if (results) results.innerHTML = found.map(e => `<li><a href="${e.href}">${e.title}</a><small>${e.text}</small></li>`).join(''); };
+      opener?.addEventListener('click', () => { dialog?.showModal(); input?.focus(); render(); });
+      input?.addEventListener('input', render);
+      document.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); dialog?.showModal(); input?.focus(); render(); }});
+    </script>
+  </body>
+</html>

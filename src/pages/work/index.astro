@@ -1,0 +1,4 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; import { projects } from '../../data/content';
+---
+<BaseLayout title="Work — Justin Tahai" description="Selected public work and technical context by Justin Tahai."><section class="page-intro"><span class="eyebrow">Selected work</span><h1>Useful work<br />has receipts.</h1><p>These records describe public context, design constraints, and evidence. They do not represent private applications, account access, or unreleased capabilities.</p></section><section class="band"><div class="project-grid">{projects.map((project, i) => <a class="project-card" href={`/work/${project.slug}/`}><span class="project-no">0{i + 1} · {project.business}</span><div><h3>{project.title}</h3><p>{project.summary}</p></div><div>{project.tags.map(tag => <span class="tag">#{tag}</span>)}</div></a>)}</div></section></BaseLayout>

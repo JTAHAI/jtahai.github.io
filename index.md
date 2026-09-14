@@ -23,7 +23,7 @@ permalink: /
 </div>
 
 ## Where to find me
-- Personal profile hub: **https://justintahai.pages.dev**
+- Personal profile hub: [justintahai.jtforme.com](https://justintahai.jtforme.com/)
 - LinkedIn (primary): **https://www.linkedin.com/in/justintahai/**
 - GitHub: **https://github.com/JTAHAI**
 
@@ -32,7 +32,7 @@ These are separate audiences on purpose — but they’re all part of the same �
 
 - Campaign / civic information: **https://www.jtforme.com**
 - Movement / reform mission: **https://focaf.jtforme.com**
-- TAHAI Web Services: **https://tahai.jtforme.com**
+- TAHAI Web Services: [tahai.net](https://tahai.net/)
 
 ## Examples (static-first in practice)
 - **Campaign / public information**: fast, readable pages + sources and references.

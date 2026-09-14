@@ -1,0 +1,4 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; import { notes } from '../../data/content';
+---
+<BaseLayout title="Notes — Justin Tahai" description="Technical notes on durable web delivery, accessibility, and systems thinking."><section class="page-intro"><span class="eyebrow">Engineering publication</span><h1>Notes that<br />survive handoff.</h1><p>Practical writing about public systems, delivery, and the decisions that make future changes less surprising.</p></section><section class="band"><div class="two-up">{notes.map(note => <a class="note-card" href={`/notes/${note.slug}/`}><time datetime={note.date}>{note.date}</time><h3>{note.title}</h3><p>{note.deck}</p></a>)}</div></section></BaseLayout>
