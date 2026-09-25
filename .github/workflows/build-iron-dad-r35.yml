@@ -1,0 +1,88 @@
+name: Build IRON-DAD R35 final site
+
+on:
+  push:
+    branches:
+      - artifact/iron-dad-r35
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install OpenSCAD
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openscad
+
+      - name: Build R32 electronics package
+        run: |
+          rm -rf out /tmp/r35-downloads
+          mkdir -p /tmp/r35-downloads
+          python r32/build.py
+          cp out/site/downloads/IRON_KIDS_K2_INTEGRATED_ELECTRONICS_R32.zip /tmp/r35-downloads/
+
+      - name: Build R34 IRON-KITTY geometry package
+        run: |
+          rm -rf out
+          python r34/build.py
+          cp out/site/downloads/IRON_KITTY_GEOMETRY_R34.zip /tmp/r35-downloads/
+
+      - name: Build consolidated R35 family site
+        env:
+          SITE_URL: https://iron-dad.pages.dev
+        run: |
+          rm -rf out
+          mkdir -p out/site/downloads
+          cp /tmp/r35-downloads/*.zip out/site/downloads/
+          python r35/build.py
+
+      - name: Verify root and packaged downloads
+        run: |
+          test -f out/site/index.html
+          test -f out/site/R35_VERIFICATION.json
+          test -f out/site/downloads/IRON_KIDS_K2_INTEGRATED_ELECTRONICS_R32.zip
+          test -f out/site/downloads/IRON_KITTY_GEOMETRY_R34.zip
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          v=json.loads(Path('out/site/R35_VERIFICATION.json').read_text())
+          assert v['root_index_exists']
+          assert not v['missing_references']
+          assert v['download_count']==2
+          assert v['remaining_passes']==0
+          print(v)
+          PY
+
+      - name: Upload complete Cloudflare Pages website
+        uses: actions/upload-artifact@v4
+        with:
+          name: IRON_DAD_CLOUDFLARE_PAGES_R35
+          path: out/site/
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 14
+
+      - name: Upload R35 source and manifests
+        uses: actions/upload-artifact@v4
+        with:
+          name: IRON_DAD_R35_SITE_SOURCE
+          path: |
+            r35/
+            out/site/R35_VERIFICATION.json
+            out/site/R35_PACKAGE_MANIFEST.json
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 14
