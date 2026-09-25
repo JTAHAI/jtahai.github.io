@@ -27,6 +27,17 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y openscad
 
+      - name: Fix OpenSCAD forearm template placeholders
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('r32/build.py')
+          s = p.read_text()
+          s = s.replace("FOREARM.format(rail=42)", "FOREARM.replace('{rail}', '42')")
+          s = s.replace("FOREARM.format(rail=-42)", "FOREARM.replace('{rail}', '-42')")
+          p.write_text(s)
+          PY
+
       - name: Build model and website artifacts
         run: python r32/build.py
 
