@@ -1,0 +1,49 @@
+name: Build IRON-DAD R34 artifacts
+
+on:
+  push:
+    branches:
+      - artifact/iron-dad-r34
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install OpenSCAD
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openscad
+
+      - name: Build IRON-KITTY geometry and website
+        run: python r34/build.py
+
+      - name: Upload complete Cloudflare Pages website
+        uses: actions/upload-artifact@v4
+        with:
+          name: IRON_DAD_CLOUDFLARE_PAGES_R34
+          path: out/site/
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 14
+
+      - name: Upload IRON-KITTY geometry package
+        uses: actions/upload-artifact@v4
+        with:
+          name: IRON_KITTY_GEOMETRY_R34
+          path: out/model/
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 14
