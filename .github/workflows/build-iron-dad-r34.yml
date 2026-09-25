@@ -27,6 +27,17 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y openscad
 
+      - name: Optimize OpenSCAD tessellation for release build
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('r34/build.py')
+          s = p.read_text()
+          s = s.replace('$fn=56;', '$fn=30;')
+          s = s.replace('module rounded_box(v=[10,10,10], r=2){ minkowski(){ cube([v[0]-2*r,v[1]-2*r,v[2]-2*r],center=true); sphere(r=r); } }', 'module rounded_box(v=[10,10,10], r=2){ cube(v,center=true); }')
+          p.write_text(s)
+          PY
+
       - name: Build IRON-KITTY geometry and website
         run: python r34/build.py
 
