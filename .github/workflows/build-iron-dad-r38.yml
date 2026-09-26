@@ -1,0 +1,75 @@
+name: Build IRON-DAD R38 artifacts
+
+on:
+  push:
+    branches:
+      - artifact/iron-dad-r38
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install CAD, rendering, and verification tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openscad xvfb ffmpeg
+          python -m pip install --upgrade pip
+          python -m pip install numpy==1.26.4 trimesh==4.4.9 pillow==10.4.0 manifold3d==2.5.1
+
+      - name: Build R38 model and website
+        run: python r38/build.py
+
+      - name: Verify artifacts
+        run: |
+          test -f out/site/index.html
+          test -f out/site/R38_VERIFICATION.json
+          test -f out/site/downloads/IRON_KIDS_K2_REGISTERED_PILOT_ASSEMBLY_R38.zip
+          test -f out/model/ASSEMBLIES/K2_REGISTERED_PILOT_CLOSED_R38.glb
+          test -f out/model/ASSEMBLIES/K2_REGISTERED_PILOT_EXPLODED_R38.glb
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          v=json.loads(Path('out/site/R38_VERIFICATION.json').read_text())
+          assert v['root_index_exists']
+          assert not v['missing_local_references']
+          assert v['image_files'] >= 5
+          assert v['video_files'] >= 1
+          m=json.loads(Path('out/model/DOCS/VERIFICATION.json').read_text())
+          assert m['all_print_stls_watertight']
+          assert m['all_parts_within_220x220x240']
+          assert m['growth_regression']['link_lower_adapter_intersection_mm3'] <= 0.15
+          assert m['growth_regression']['link_upper_adapter_intersection_mm3'] <= 0.15
+          assert m['chest_interface']['pattern_match']
+          print(v)
+          PY
+
+      - name: Upload complete Cloudflare Pages website
+        uses: actions/upload-artifact@v4
+        with:
+          name: IRON_DAD_CLOUDFLARE_PAGES_R38
+          path: out/site/
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 14
+
+      - name: Upload registered K2 pilot model package
+        uses: actions/upload-artifact@v4
+        with:
+          name: IRON_KIDS_K2_REGISTERED_PILOT_ASSEMBLY_R38
+          path: out/model/
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 14
