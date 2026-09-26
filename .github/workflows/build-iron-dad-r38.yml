@@ -27,7 +27,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y openscad xvfb ffmpeg
           python -m pip install --upgrade pip
-          python -m pip install numpy==1.26.4 trimesh==4.4.9 pillow==10.4.0 manifold3d==2.5.1
+          python -m pip install numpy==1.26.4 scipy==1.14.1 trimesh==4.4.9 pillow==10.4.0 manifold3d==2.5.1
 
       - name: Patch thin-lid fillets for OpenSCAD 2021
         run: |
