@@ -29,6 +29,17 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install numpy==1.26.4 trimesh==4.4.9 pillow==10.4.0 manifold3d==2.5.1
 
+      - name: Patch thin-lid fillets for OpenSCAD 2021
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('r38/build.py')
+          s=p.read_text()
+          s=s.replace('rounded_box([104,82,3.0],2)', 'rounded_box([104,82,3.0],1.0)')
+          s=s.replace('rounded_box([86,46,2.8],1.6)', 'rounded_box([86,46,2.8],0.9)')
+          p.write_text(s)
+          PY
+
       - name: Build R38 model and website
         run: python r38/build.py
 
