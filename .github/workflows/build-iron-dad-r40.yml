@@ -1,0 +1,124 @@
+name: Build IRON-DAD R40 artifacts
+
+on:
+  push:
+    branches:
+      - artifact/iron-dad-r40
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install CAD, firmware, media, and verification tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openscad xvfb ffmpeg
+          python -m pip install --upgrade pip
+          python -m pip install numpy==1.26.4 trimesh==4.4.9 pillow==10.4.0 manifold3d==2.5.1 scipy==1.14.1 platformio==6.1.18
+
+      - name: Patch inherited R38 OpenSCAD compatibility
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('r38/build.py')
+          s=p.read_text()
+          s=s.replace('rounded_box([104,82,3.0],2)', 'rounded_box([104,82,3.0],1.0)')
+          s=s.replace('rounded_box([86,46,2.8],1.6)', 'rounded_box([86,46,2.8],0.9)')
+          p.write_text(s)
+          PY
+
+      - name: Patch inherited R39 source compatibility
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('r39/build.py')
+          s=p.read_text()
+          s=s.replace('selection.\\n")', 'selection.\\n""")')
+          s=s.replace('Achilles region.\\n")', 'Achilles region.\\n""")')
+          s=s.replace('uint32_t lastSensorMs = 0;', 'uint32_t lastSensorReadMs = 0;\nuint32_t lastValidSensorMs = 0;')
+          s=s.replace('lastSensorMs = millis();', 'lastValidSensorMs = millis();')
+          s=s.replace('  if (inaPresent) {', '  lastSensorReadMs = millis();\n\n  if (inaPresent) {', 1)
+          s=s.replace('if (now - lastSensorMs >= 1000) readSensors();', 'if (now - lastSensorReadMs >= 1000) readSensors();')
+          s=s.replace('if (ahtPresent && now - lastSensorMs > 3000)', 'if (ahtPresent && now - lastValidSensorMs > 3000)')
+          p.write_text(s)
+          PY
+          python -m py_compile r39/build.py r40/build.py
+
+      - name: Build R38 registered pilot baseline
+        run: python r38/build.py
+
+      - name: Prepare R39 commissioning release
+        run: python r39/build.py prepare
+
+      - name: Compile chest NodeMCU firmware
+        run: pio run -d out/model/FIRMWARE_R39/chest
+
+      - name: Compile forearm NodeMCU firmware
+        run: pio run -d out/model/FIRMWARE_R39/forearm
+
+      - name: Finalize R39 commissioning release
+        run: python r39/build.py finalize
+
+      - name: Build R40 physical validation release
+        run: python r40/build.py
+
+      - name: Verify R40 artifacts
+        run: |
+          test -f out/site/index.html
+          test -f out/site/R40_VERIFICATION.json
+          test -f out/site/iron-kids/validation/index.html
+          test -f out/site/downloads/IRON_KIDS_K2_PHYSICAL_VALIDATION_R40.zip
+          test -f out/model/PHYSICAL_VALIDATION_R40/DOCS/VERIFICATION_R40.json
+          test -f out/model/PHYSICAL_VALIDATION_R40/DOCS/PILOT_TEST_MATRIX_R40.csv
+          test -f out/model/PHYSICAL_VALIDATION_R40/PREVIEWS/r40-validation-sequence.mp4
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          site=json.loads(Path('out/site/R40_VERIFICATION.json').read_text())
+          model=json.loads(Path('out/model/PHYSICAL_VALIDATION_R40/DOCS/VERIFICATION_R40.json').read_text())
+          assert site['root_index_exists']
+          assert not site['missing_local_references']
+          assert site['image_files'] >= 9
+          assert site['video_files'] >= 2
+          assert site['validation_console_present']
+          assert not site['physical_child_validation_performed']
+          assert model['fixture_count'] == 12
+          assert model['all_fixture_stls_watertight']
+          assert model['all_fixture_stls_positive_volume']
+          assert model['all_fixture_stls_within_220x220x240']
+          assert not model['physical_child_validation_performed']
+          assert model['remaining_planned_passes'] == 1
+          print(json.dumps(site, indent=2))
+          print(json.dumps(model, indent=2))
+          PY
+
+      - name: Upload complete Cloudflare Pages website
+        uses: actions/upload-artifact@v4
+        with:
+          name: IRON_DAD_CLOUDFLARE_PAGES_R40
+          path: out/site/
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 14
+
+      - name: Upload K2 physical validation package
+        uses: actions/upload-artifact@v4
+        with:
+          name: IRON_KIDS_K2_PHYSICAL_VALIDATION_R40
+          path: out/model/
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 14
