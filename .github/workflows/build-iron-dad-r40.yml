@@ -40,7 +40,7 @@ jobs:
           p.write_text(s)
           PY
 
-      - name: Patch inherited R39 source compatibility
+      - name: Patch inherited R39 and R40 source compatibility
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -54,6 +54,12 @@ jobs:
           s=s.replace('if (now - lastSensorMs >= 1000) readSensors();', 'if (now - lastSensorReadMs >= 1000) readSensors();')
           s=s.replace('if (ahtPresent && now - lastSensorMs > 3000)', 'if (ahtPresent && now - lastValidSensorMs > 3000)')
           p.write_text(s)
+
+          p40=Path('r40/build.py')
+          s40=p40.read_text()
+          s40=s40.replace('rounded_box([82,42,10],5)', 'rounded_box([82,42,10],4)')
+          s40=s40.replace('rounded_box([116,76,4],2)', 'rounded_box([116,76,4],1.5)')
+          p40.write_text(s40)
           PY
           python -m py_compile r39/build.py r40/build.py
 
