@@ -47,6 +47,7 @@ jobs:
           p=Path('r39/build.py')
           s=p.read_text()
           s=s.replace('selection.\\n")', 'selection.\\n""")')
+          s=s.replace('Achilles region.\\n")', 'Achilles region.\\n""")')
           s=s.replace('uint32_t lastSensorMs = 0;', 'uint32_t lastSensorReadMs = 0;\nuint32_t lastValidSensorMs = 0;')
           s=s.replace('lastSensorMs = millis();', 'lastValidSensorMs = millis();')
           s=s.replace('  if (inaPresent) {', '  lastSensorReadMs = millis();\n\n  if (inaPresent) {', 1)
@@ -54,6 +55,7 @@ jobs:
           s=s.replace('if (ahtPresent && now - lastSensorMs > 3000)', 'if (ahtPresent && now - lastValidSensorMs > 3000)')
           p.write_text(s)
           PY
+          python -m py_compile r39/build.py
 
       - name: Build R38 registered pilot baseline
         run: python r38/build.py
