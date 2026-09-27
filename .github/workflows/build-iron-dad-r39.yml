@@ -1,0 +1,115 @@
+name: Build IRON-DAD R39 artifacts
+
+on:
+  push:
+    branches:
+      - artifact/iron-dad-r39
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install CAD, firmware, rendering, and verification tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openscad xvfb ffmpeg
+          python -m pip install --upgrade pip
+          python -m pip install numpy==1.26.4 trimesh==4.4.9 pillow==10.4.0 manifold3d==2.5.1 scipy==1.14.1 platformio==6.1.18
+
+      - name: Patch inherited R38 OpenSCAD compatibility
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('r38/build.py')
+          s=p.read_text()
+          s=s.replace('rounded_box([104,82,3.0],2)', 'rounded_box([104,82,3.0],1.0)')
+          s=s.replace('rounded_box([86,46,2.8],1.6)', 'rounded_box([86,46,2.8],0.9)')
+          p.write_text(s)
+          PY
+
+      - name: Patch R39 sensor scheduler
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('r39/build.py')
+          s=p.read_text()
+          s=s.replace('uint32_t lastSensorMs = 0;', 'uint32_t lastSensorReadMs = 0;\nuint32_t lastValidSensorMs = 0;')
+          s=s.replace('lastSensorMs = millis();', 'lastValidSensorMs = millis();')
+          s=s.replace('  if (inaPresent) {', '  lastSensorReadMs = millis();\n\n  if (inaPresent) {', 1)
+          s=s.replace('if (now - lastSensorMs >= 1000) readSensors();', 'if (now - lastSensorReadMs >= 1000) readSensors();')
+          s=s.replace('if (ahtPresent && now - lastSensorMs > 3000)', 'if (ahtPresent && now - lastValidSensorMs > 3000)')
+          p.write_text(s)
+          PY
+
+      - name: Build R38 registered pilot baseline
+        run: python r38/build.py
+
+      - name: Prepare R39 firmware, print desk, and website
+        run: python r39/build.py prepare
+
+      - name: Compile chest NodeMCU firmware
+        run: pio run -d out/model/FIRMWARE_R39/chest
+
+      - name: Compile forearm NodeMCU firmware
+        run: pio run -d out/model/FIRMWARE_R39/forearm
+
+      - name: Finalize R39 packages and checks
+        run: python r39/build.py finalize
+
+      - name: Verify R39 artifacts
+        run: |
+          test -f out/site/index.html
+          test -f out/site/R39_VERIFICATION.json
+          test -f out/site/downloads/IRON_KIDS_K2_COMMISSIONING_R39.zip
+          test -f out/model/FIRMWARE_R39/bin/iron_kids_chest_nodemcuv2_r39.bin
+          test -f out/model/FIRMWARE_R39/bin/iron_kids_forearm_nodemcuv2_r39.bin
+          test -f out/model/PRINT_RELEASE_R39/PRINT_MANIFEST_R39.csv
+          test -f out/model/PRINT_RELEASE_R39/WIRING_DIAGRAM_R39.svg
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          site=json.loads(Path('out/site/R39_VERIFICATION.json').read_text())
+          model=json.loads(Path('out/model/DOCS/VERIFICATION_R39.json').read_text())
+          assert site['root_index_exists']
+          assert not site['missing_local_references']
+          assert site['image_files'] >= 7
+          assert site['video_files'] >= 1
+          assert site['compiled_firmware_projects'] == 2
+          assert model['supervisor_tests'] == 'passed'
+          assert model['print_checks']['all_watertight']
+          assert model['print_checks']['all_within_220x220x240']
+          assert model['print_checks']['all_on_or_above_build_plate']
+          assert model['remaining_planned_passes'] == 2
+          print(json.dumps(site, indent=2))
+          PY
+
+      - name: Upload complete Cloudflare Pages website
+        uses: actions/upload-artifact@v4
+        with:
+          name: IRON_DAD_CLOUDFLARE_PAGES_R39
+          path: out/site/
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 14
+
+      - name: Upload K2 commissioning model package
+        uses: actions/upload-artifact@v4
+        with:
+          name: IRON_KIDS_K2_COMMISSIONING_R39
+          path: out/model/
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 14
