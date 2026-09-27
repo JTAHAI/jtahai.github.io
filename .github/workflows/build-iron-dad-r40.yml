@@ -59,6 +59,8 @@ jobs:
           s40=p40.read_text()
           s40=s40.replace('rounded_box([82,42,10],5)', 'rounded_box([82,42,10],4)')
           s40=s40.replace('rounded_box([116,76,4],2)', 'rounded_box([116,76,4],1.5)')
+          s40=s40.replace('for(x=[-48:16:48])', 'for(x=[-40:16:40])')
+          s40=s40.replace('for(y=[-28:14:28])', 'for(y=[-21:14:21])')
           p40.write_text(s40)
           PY
           python -m py_compile r39/build.py r40/build.py
