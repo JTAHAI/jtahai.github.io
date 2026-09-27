@@ -40,12 +40,13 @@ jobs:
           p.write_text(s)
           PY
 
-      - name: Patch R39 sensor scheduler
+      - name: Patch R39 source compatibility
         run: |
           python - <<'PY'
           from pathlib import Path
           p=Path('r39/build.py')
           s=p.read_text()
+          s=s.replace('selection.\\n")', 'selection.\\n""")')
           s=s.replace('uint32_t lastSensorMs = 0;', 'uint32_t lastSensorReadMs = 0;\nuint32_t lastValidSensorMs = 0;')
           s=s.replace('lastSensorMs = millis();', 'lastValidSensorMs = millis();')
           s=s.replace('  if (inaPresent) {', '  lastSensorReadMs = millis();\n\n  if (inaPresent) {', 1)
