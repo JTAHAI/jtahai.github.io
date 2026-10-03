@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>LawCraft II: Reign of Error</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">PROCEDURAL GAMES // RTS PROTOTYPE</div>
+        <h1>LAWCRAFT II <span>REIGN OF ERROR</span></h1>
+      </div>
+      <div class="resources" aria-label="resources">
+        <div><b id="trustVal">100</b><small>TRUST</small></div>
+        <div><b id="evidenceVal">80</b><small>EVIDENCE</small></div>
+        <div><b id="timeVal">120</b><small>TIME</small></div>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="stage-wrap">
+        <canvas id="game" width="960" height="576" aria-label="LawCraft II battlefield"></canvas>
+        <div id="banner" class="banner hidden"></div>
+        <div class="mobile-help">Tap unit → tap ground/enemy. Desktop: left-click select, right-click command.</div>
+      </section>
+
+      <aside class="panel">
+        <section>
+          <h2>MISSION 01</h2>
+          <p class="mission">Protect the Homestead. Break through the procedural depths and destroy the <b>Billing Pit</b>.</p>
+        </section>
+
+        <section>
+          <h3>Selected</h3>
+          <div id="selectedCard" class="selected-card">No unit selected.</div>
+        </section>
+
+        <section>
+          <h3>Recruit</h3>
+          <div class="button-grid">
+            <button data-train="parent">Parent<br><small>20 Trust / 12 Time</small></button>
+            <button data-train="volunteer">Volunteer Lawyer<br><small>25 Evidence / 18 Trust</small></button>
+            <button data-train="archivist">Archivist<br><small>18 Evidence / 10 Time</small></button>
+          </div>
+        </section>
+
+        <section>
+          <h3>Actions</h3>
+          <div class="button-grid two">
+            <button id="authorityBtn">Controlling Authority<br><small>40 Evidence</small></button>
+            <button id="rallyBtn">Family Rally<br><small>35 Trust</small></button>
+            <button id="pauseBtn">Pause</button>
+            <button id="restartBtn">Restart</button>
+          </div>
+        </section>
+
+        <section class="legend">
+          <h3>Field Guide</h3>
+          <p><span class="swatch human"></span> Family Alliance</p>
+          <p><span class="swatch orc"></span> Orc Bar Horde</p>
+          <p><span class="swatch node"></span> Record Cache</p>
+        </section>
+
+        <section class="log-wrap">
+          <h3>Clerk's Log</h3>
+          <div id="log" class="log"></div>
+        </section>
+      </aside>
+    </main>
+
+    <footer>
+      Original satire prototype. No affiliation with Blizzard, Warcraft, any court, bar association, legal-aid program, or real person.
+    </footer>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
