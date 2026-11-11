@@ -1,0 +1,24 @@
+# DISSENT 1.0.0-RC1 Release Checklist
+
+- [x] Authentic Grand Prix Mk IV LOD2 integrated
+- [x] Source checksum verified
+- [x] Original DISSENT wing kit retained
+- [x] Five distinct final-machine forms
+- [x] False-victory reversal
+- [x] Extraction pursuit
+- [x] First-run training brief
+- [x] Automatic local checkpoint
+- [x] Resume flow
+- [x] Progress export/import
+- [x] Result-card export
+- [x] High-contrast mode
+- [x] Reactive engine/music system
+- [x] 25,000-seed generator regression
+- [x] Chromium/WebGL2 smoke test
+- [x] Standalone test
+- [x] Third-party attribution
+- [x] Cloudflare headers and no-runtime-network CSP
+- [ ] Human long-run balance pass on intended hardware
+- [ ] Production deployment to procedural4.JTforME.com
+- [ ] Production-domain smoke test
+- [ ] Promote RC1 to final 1.0 after those checks

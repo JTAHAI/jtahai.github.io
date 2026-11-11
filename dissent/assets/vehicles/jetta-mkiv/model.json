@@ -1,0 +1,393 @@
+{
+  "version": 1,
+  "id": "jetta",
+  "lods": [
+    {
+      "file": "lod0.bin",
+      "bytes": 4609656,
+      "triangles": 64023,
+      "sha256": "9efb957dfe061cb650322988e4a350a467a4a13e16784f49d34bdeb3301e5e77",
+      "parts": [
+        {
+          "name": "mkiv_lod0_0",
+          "offset": 0,
+          "floats": 928764,
+          "color": "#05070b",
+          "mat": 1,
+          "rough": 0.16,
+          "metal": 0.018,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod0_1",
+          "offset": 3715056,
+          "floats": 5292,
+          "color": "#aeb8c1",
+          "mat": 3,
+          "rough": 0.22,
+          "metal": 0.88,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod0_2",
+          "offset": 3736224,
+          "floats": 22770,
+          "color": "#111418",
+          "mat": 4,
+          "rough": 0.78,
+          "metal": 0.02,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod0_3",
+          "offset": 3827304,
+          "floats": 3294,
+          "color": "#05070b",
+          "mat": 1,
+          "rough": 0.16,
+          "metal": 0.018,
+          "em": 0,
+          "roof": true
+        },
+        {
+          "name": "mkiv_lod0_4",
+          "offset": 3840480,
+          "floats": 34272,
+          "color": "#071823",
+          "mat": 2,
+          "rough": 0.11,
+          "metal": 0.06,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod0_5",
+          "offset": 3977568,
+          "floats": 16236,
+          "color": "#2a2028",
+          "mat": 2,
+          "rough": 0.13,
+          "metal": 0.42,
+          "em": 0.1,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod0_6",
+          "offset": 4042512,
+          "floats": 93600,
+          "color": "#c7d7df",
+          "mat": 8,
+          "rough": 0.18,
+          "metal": 0.15,
+          "em": 0.18,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod0_7",
+          "offset": 4416912,
+          "floats": 44262,
+          "color": "#dde3e8",
+          "mat": 3,
+          "rough": 0.095,
+          "metal": 0.98,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod0_8",
+          "offset": 4593960,
+          "floats": 1278,
+          "color": "#0b1015",
+          "mat": 4,
+          "rough": 0.62,
+          "metal": 0.03,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod0_9",
+          "offset": 4599072,
+          "floats": 918,
+          "color": "#9ab4c3",
+          "mat": 2,
+          "rough": 0.055,
+          "metal": 0.85,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod0_10",
+          "offset": 4602744,
+          "floats": 1728,
+          "color": "#e0e7ec",
+          "mat": 3,
+          "rough": 0.09,
+          "metal": 0.99,
+          "em": 0,
+          "roof": false
+        }
+      ]
+    },
+    {
+      "file": "lod1.bin",
+      "bytes": 1930248,
+      "triangles": 26809,
+      "sha256": "2cbe29870ad5c7d4ba953336ae483918328a9f6bead87b33eb51ed69b014a6eb",
+      "parts": [
+        {
+          "name": "mkiv_lod1_0",
+          "offset": 0,
+          "floats": 387018,
+          "color": "#05070b",
+          "mat": 1,
+          "rough": 0.16,
+          "metal": 0.018,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod1_1",
+          "offset": 1548072,
+          "floats": 1152,
+          "color": "#aeb8c1",
+          "mat": 3,
+          "rough": 0.22,
+          "metal": 0.88,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod1_2",
+          "offset": 1552680,
+          "floats": 9792,
+          "color": "#111418",
+          "mat": 4,
+          "rough": 0.78,
+          "metal": 0.02,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod1_3",
+          "offset": 1591848,
+          "floats": 1386,
+          "color": "#05070b",
+          "mat": 1,
+          "rough": 0.16,
+          "metal": 0.018,
+          "em": 0,
+          "roof": true
+        },
+        {
+          "name": "mkiv_lod1_4",
+          "offset": 1597392,
+          "floats": 14706,
+          "color": "#071823",
+          "mat": 2,
+          "rough": 0.11,
+          "metal": 0.06,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod1_5",
+          "offset": 1656216,
+          "floats": 7002,
+          "color": "#2a2028",
+          "mat": 2,
+          "rough": 0.13,
+          "metal": 0.42,
+          "em": 0.1,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod1_6",
+          "offset": 1684224,
+          "floats": 40302,
+          "color": "#c7d7df",
+          "mat": 8,
+          "rough": 0.18,
+          "metal": 0.15,
+          "em": 0.18,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod1_7",
+          "offset": 1845432,
+          "floats": 19044,
+          "color": "#dde3e8",
+          "mat": 3,
+          "rough": 0.095,
+          "metal": 0.98,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod1_8",
+          "offset": 1921608,
+          "floats": 540,
+          "color": "#0b1015",
+          "mat": 4,
+          "rough": 0.62,
+          "metal": 0.03,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod1_9",
+          "offset": 1923768,
+          "floats": 882,
+          "color": "#9ab4c3",
+          "mat": 2,
+          "rough": 0.055,
+          "metal": 0.85,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod1_10",
+          "offset": 1927296,
+          "floats": 738,
+          "color": "#e0e7ec",
+          "mat": 3,
+          "rough": 0.09,
+          "metal": 0.99,
+          "em": 0,
+          "roof": false
+        }
+      ]
+    },
+    {
+      "file": "lod2.bin",
+      "bytes": 729288,
+      "triangles": 10129,
+      "sha256": "f07efefdb685ed1f5252cbb8d3fcbef182ca439d4b196f4686e738225dd96abf",
+      "parts": [
+        {
+          "name": "mkiv_lod2_0",
+          "offset": 0,
+          "floats": 155772,
+          "color": "#05070b",
+          "mat": 1,
+          "rough": 0.16,
+          "metal": 0.018,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod2_1",
+          "offset": 623088,
+          "floats": 846,
+          "color": "#aeb8c1",
+          "mat": 3,
+          "rough": 0.22,
+          "metal": 0.88,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod2_2",
+          "offset": 626472,
+          "floats": 3798,
+          "color": "#111418",
+          "mat": 4,
+          "rough": 0.78,
+          "metal": 0.02,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod2_3",
+          "offset": 641664,
+          "floats": 846,
+          "color": "#05070b",
+          "mat": 1,
+          "rough": 0.16,
+          "metal": 0.018,
+          "em": 0,
+          "roof": true
+        },
+        {
+          "name": "mkiv_lod2_4",
+          "offset": 645048,
+          "floats": 5796,
+          "color": "#071823",
+          "mat": 2,
+          "rough": 0.11,
+          "metal": 0.06,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod2_5",
+          "offset": 668232,
+          "floats": 2718,
+          "color": "#2a2028",
+          "mat": 2,
+          "rough": 0.13,
+          "metal": 0.42,
+          "em": 0.1,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod2_6",
+          "offset": 679104,
+          "floats": 3438,
+          "color": "#c7d7df",
+          "mat": 8,
+          "rough": 0.18,
+          "metal": 0.15,
+          "em": 0.18,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod2_7",
+          "offset": 692856,
+          "floats": 7470,
+          "color": "#dde3e8",
+          "mat": 3,
+          "rough": 0.095,
+          "metal": 0.98,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod2_8",
+          "offset": 722736,
+          "floats": 468,
+          "color": "#0b1015",
+          "mat": 4,
+          "rough": 0.62,
+          "metal": 0.03,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod2_9",
+          "offset": 724608,
+          "floats": 882,
+          "color": "#9ab4c3",
+          "mat": 2,
+          "rough": 0.055,
+          "metal": 0.85,
+          "em": 0,
+          "roof": false
+        },
+        {
+          "name": "mkiv_lod2_10",
+          "offset": 728136,
+          "floats": 288,
+          "color": "#e0e7ec",
+          "mat": 3,
+          "rough": 0.09,
+          "metal": 0.99,
+          "em": 0,
+          "roof": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "DISSENT: Carpooling to Hell",
+  "short_name": "DISSENT",
+  "description": "Pilot the authentic winged 1999\u00bd Mk IV Jetta through seven procedurally generated circles of judicial absurdity.",
+  "start_url": "/",
+  "display": "fullscreen",
+  "background_color": "#07090d",
+  "theme_color": "#07090d",
+  "orientation": "landscape",
+  "icons": [],
+  "id": "/",
+  "categories": [
+    "games",
+    "entertainment"
+  ]
+}

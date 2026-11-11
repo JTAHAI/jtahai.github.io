@@ -1,0 +1,6 @@
+DISSENT: Carpooling to Hell
+Version: 1.0.0-RC1
+Codename: Return of the Record
+Generator: G7-ABSURDITY-1
+Authentic ship: Grand Prix Mk IV LOD2 + original DISSENT wing kit
+Target: procedural4.JTforME.com
