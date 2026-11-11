@@ -1,0 +1,15 @@
+{
+  "generatorVersion": "G7-ABSURDITY-1",
+  "cases": 25000,
+  "failures": 0,
+  "averageRooms": 35.71,
+  "minRooms": 16,
+  "maxRooms": 45,
+  "modes": {
+    "quick": 5000,
+    "grand": 15000,
+    "endless": 5000
+  },
+  "generatedAt": "2026-11-11T00:22:13.276Z",
+  "failureExamples": []
+}

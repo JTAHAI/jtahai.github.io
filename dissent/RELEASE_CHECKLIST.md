@@ -1,24 +1,17 @@
-# DISSENT 1.0.0-RC1 Release Checklist
+# DISSENT RC2 release checklist
 
-- [x] Authentic Grand Prix Mk IV LOD2 integrated
-- [x] Source checksum verified
-- [x] Original DISSENT wing kit retained
-- [x] Five distinct final-machine forms
-- [x] False-victory reversal
-- [x] Extraction pursuit
-- [x] First-run training brief
-- [x] Automatic local checkpoint
-- [x] Resume flow
-- [x] Progress export/import
-- [x] Result-card export
-- [x] High-contrast mode
-- [x] Reactive engine/music system
-- [x] 25,000-seed generator regression
-- [x] Chromium/WebGL2 smoke test
-- [x] Standalone test
-- [x] Third-party attribution
-- [x] Cloudflare headers and no-runtime-network CSP
-- [ ] Human long-run balance pass on intended hardware
-- [ ] Production deployment to procedural4.JTforME.com
-- [ ] Production-domain smoke test
-- [ ] Promote RC1 to final 1.0 after those checks
+- [x] JavaScript syntax valid.
+- [x] DOM IDs unique and all JavaScript ID references present.
+- [x] Authentic Mk IV model loaded and checksum-validated.
+- [x] 25,000 generator cases passed.
+- [x] Desktop campaign browser smoke suite passed.
+- [x] Desktop Ultra framebuffer exceeded CSS resolution in high-DPI test.
+- [x] Landscape mobile touch controls displayed and drove the ship.
+- [x] Mobile camera and map actions passed.
+- [x] Portrait rotation gate passed.
+- [x] Fullscreen user-activation test passed in Chromium.
+- [x] Standalone build generated and tested.
+- [x] Cloudflare package contains root `index.html`.
+- [ ] Sustained physical Android play session.
+- [ ] Sustained physical iPhone/iPad Safari and installed-PWA play session.
+- [ ] Production-domain cache, certificate, fullscreen, and orientation smoke test.

@@ -1,73 +1,55 @@
 # DISSENT: Carpooling to Hell
 
-**Version 1.0.0-RC1 — Return of the Record**  
+**Version 1.0.0-RC2 — Adaptive Flight Deck**  
 Target deployment: **https://procedural4.JTforME.com**
 
 DISSENT is an original, local-first WebGL2 six-degrees-of-freedom arcade roguelite. You pilot Justin's winged black 1999½ Mk IV Jetta through a procedurally generated judicial underworld, recover the buried record, decide what to expose, protect, or archive, disable the machinery beneath the bench, and bring the surviving record back into daylight.
 
 > THE COURTS HAVE BASEMENTS. HELL HAS SEVEN. THE JETTA HAS WINGS.
 
-## RC1 headline
+## RC2 headline
 
-This release replaces the old approximate car body with the **actual optimized Grand Prix Mk IV geometry** and then bolts the original DISSENT flight conversion around it: fighter wings, cannons, roll fins, thrusters, and an entirely unreasonable mandate to fly through hell.
+RC2 turns the release candidate into **one adaptive game build** rather than separate desktop and phone games:
 
-The game remains dependency-free at runtime. The optimized vehicle payload is bundled locally and also embedded into the standalone release.
+- Desktop devices use keyboard/mouse, pointer lock, optional gamepad support, and high-resolution rendering.
+- Phones and coarse-pointer devices receive a complete two-stick touch flight deck.
+- Mobile play requests fullscreen and landscape orientation where the browser permits it.
+- Installed web-app mode uses the manifest's fullscreen landscape presentation and a same-origin offline shell.
+- Portrait play presents a rotation gate instead of squeezing the flight controls into an unusable layout.
+- The renderer chooses a safe mobile resolution automatically while allowing desktop High and Ultra supersampling.
 
-## The complete game
+The optimized Grand Prix Mk IV model remains the actual hero vehicle. The complete release has no runtime third-party requests.
 
-- True 6DOF flight: pitch, yaw, roll, strafe, rise, descend, reverse, airbrake, and afterburner.
-- Fixed 120 Hz simulation with Arcade Assist, Classic Drift, and Precision Tunnel handling.
-- Chase, hood, and cockpit cameras.
-- Keyboard/mouse and dual-stick gamepad input.
-- Deterministic connected facilities with loops, alternate paths, vertical shafts, secrets, landmarks, and multiple objective routes.
-- Three formats:
-  - **One More Filing:** a short three-circle run.
-  - **The Grand Descent:** the full seven-circle campaign.
-  - **Endless Appeal:** escalating sectors with carry-forward resources and Truth Ledger history.
-- Seven circles:
-  1. Public Facade
-  2. Continuance Catacombs
-  3. Sealed Registry
-  4. Paywall Pits
-  5. E-Filing Furnace
-  6. Infernal Bench
-  7. Null Tribunal
-- Seven institutional enemy machines and seven procedural hazard systems.
-- The Absurdity Director, which changes rules during play and generates solvable procedural disasters.
-- Truth Ledger choices that alter score, survivability, secrets, record integrity, and boss armor.
-- Six Garage of Appeals modules, with two selected per run.
-- Five visually and mechanically distinct final machines.
-- A deliberate false-victory reversal in full-length modes: relief may be granted and then procedurally ungranted.
-- A collapsing extraction run with a final-page pursuit.
+## Adaptive display modes
 
-## New in 1.0 RC1
+| Setting | Intended use |
+|---|---|
+| Adaptive Auto | Detects touch/desktop capability and selects a safe profile |
+| Battery Saver | Reduced geometry, effects, and internal resolution |
+| Balanced | Midrange laptops, tablets, and integrated GPUs |
+| Desktop High | Native high-DPI and 4K-capable desktop rendering |
+| Desktop Ultra | Supersampled desktop output within a guarded pixel budget |
 
-### Authentic Grand Prix Jetta
+The renderer respects device pixel ratio but also applies per-profile pixel budgets so high-DPI phones do not accidentally attempt desktop-scale framebuffers. Desktop Ultra can render above CSS resolution on standard-DPI monitors and retains native 4K output where hardware and browser limits permit it.
 
-- Uses the optimized `lod2.bin` vehicle mesh generated for the Procedural Grand Prix.
-- 10,129 source-model triangles; 10,417 total hero-ship triangles after the DISSENT wing conversion.
-- Checksum-verified source payload.
-- Classic Black and Iron Patriot finishes.
-- Procedural fallback remains available if the payload is missing or corrupt.
+## Mobile flight deck
 
-### Local-first continuity
+Landscape touch controls include:
 
-- Automatic local checkpoints during active runs.
-- Resume button appears when a valid checkpoint exists.
-- Local progress export/import as human-portable JSON.
-- Settings, best score, recent runs, and checkpoints stay on the device.
-- No account, analytics, cookies, cloud save, database, or runtime API.
+- Left virtual stick: forward/reverse thrust and strafe.
+- Right virtual stick: yaw and pitch.
+- Dedicated rise and descend controls.
+- Dedicated roll-left and roll-right controls for true 6DOF movement.
+- Hold-to-fire wing cannons.
+- Homing missile, afterburner, airbrake, scan, equipped module, and Truth Ledger buttons.
+- Map, camera, pause, and fullscreen controls.
+- Safe-area positioning for display cutouts and browser chrome.
+- Screen wake lock where supported.
+- Light haptic confirmation where supported.
 
-### Presentation and onboarding
+On iPhone and iPad, browser fullscreen availability depends on Safari and install state. The game still uses the full visual viewport in ordinary Safari and instructs the player to add it to the Home Screen for the closest true fullscreen experience.
 
-- Four-stage first-run training brief.
-- Depth-reveal, false-victory, final-order, last-page, and resume cinematics.
-- Distinct boss forms: mechanical rejection stamp, Grand Seal, Gatekeeper, Null Tribunal, and Erasure Engine.
-- Procedural engine note, reactive pulse score, combat intensity, and boss escalation generated through Web Audio.
-- Downloadable 1200×630 result card and copyable run record/code.
-- High-contrast mode added alongside reduced motion, reduced flash, HUD scaling, inversion, sensitivity, graphics, and volume settings.
-
-## Controls
+## Desktop controls
 
 | Control | Action |
 |---|---|
@@ -89,6 +71,24 @@ The game remains dependency-free at runtime. The optimized vehicle payload is bu
 | P / Escape | Pause |
 | 1 / 2 / 3 | Evidence disposition |
 
+## The complete game
+
+- True 6DOF flight with a fixed 120 Hz simulation.
+- Chase, hood, and cockpit cameras.
+- Deterministic connected facilities with loops, alternate paths, vertical shafts, secrets, landmarks, and multiple objective routes.
+- One More Filing, The Grand Descent, and Endless Appeal formats.
+- Seven circles of increasingly infernal judicial machinery.
+- Seven institutional enemy machines and seven procedural hazard systems.
+- The Absurdity Director, which changes rules during play and generates solvable procedural disasters.
+- Truth Ledger choices that alter score, survivability, secrets, record integrity, and boss armor.
+- Six Garage of Appeals modules, with two selected per run.
+- Five visually and mechanically distinct final machines.
+- A false-victory reversal in full-length modes.
+- A collapsing extraction run with a final-page pursuit.
+- Automatic local checkpoints, portable JSON progress, local history, and result cards.
+- No account, analytics, cookies, cloud save, database, or runtime API.
+- Same-origin service worker caches the game shell for installed/offline replay after the first successful production load.
+
 ## Run objective
 
 1. Recover every required exhibit.
@@ -102,20 +102,24 @@ The game remains dependency-free at runtime. The optimized vehicle payload is bu
 - WebGL2 required.
 - No build step required.
 - Runtime is plain HTML and JavaScript.
-- No external JavaScript, audio, font, model, analytics, advertising, or runtime network dependencies.
 - `jetta-model-data.js` embeds the optimized vehicle payload for reliable deployment and standalone use.
-- Raw model manifest and LOD2 payload are retained in `assets/vehicles/jetta-mkiv/` for provenance and validation.
+- Raw model manifest and LOD2 payload remain in `assets/vehicles/jetta-mkiv/` for provenance and validation.
 - Procedural output is deterministic for a given seed, sector, mode, and generator version.
+- Cloudflare headers explicitly permit same-origin fullscreen and screen-wake-lock use while denying unrelated sensitive capabilities.
 
 ## Validation completed
 
 - JavaScript syntax checks passed.
 - DOM ID audit passed with zero missing and zero duplicate IDs.
 - **25,000 generated facilities** passed structural, connectivity, objective, critical-path, and determinism checks with zero failures.
-- Real Chromium/WebGL2 smoke test passed with zero console errors and zero page errors.
-- Authentic model loading, model triangle count, all three modes, all evidence dispositions, automap, camera switching, local checkpoint save/restore, false victory, final defeat, run completion, and result-card rendering were exercised.
+- Desktop Chromium/WebGL2 campaign smoke suite passed.
+- 1920×1080 desktop at 1.5 device scale rendered Auto at 2880×1620 and Ultra at 3600×2025.
+- 844×390 landscape phone emulation selected the mobile profile, rendered at 1392×643, displayed all touch controls, accepted touch-flight state, cycled camera, and opened/closed the map.
+- 390×844 portrait phone emulation displayed the landscape rotation gate.
+- Browser fullscreen was successfully entered from the mobile launch control in Chromium.
+- Console errors: 0. Unhandled page errors: 0.
 
-See `QA_REPORT.md`, `QA_GENERATOR_REPORT.json`, and `QA_BROWSER_REPORT.json`.
+See `QA_REPORT.md`, `QA_GENERATOR_REPORT.json`, `QA_BROWSER_REPORT.json`, and `QA_ADAPTIVE_REPORT.json`.
 
 ## Deployment
 

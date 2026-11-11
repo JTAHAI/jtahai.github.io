@@ -1,89 +1,49 @@
-# DISSENT 1.0.0-RC1 — Return of the Record
+# DISSENT 1.0.0-RC2 — Adaptive Flight Deck
 
-This release batches the remaining compatible production passes into one release candidate: signature vehicle integration, spectacle, boss differentiation, progression continuity, onboarding, audio, accessibility, sharing, and production QA.
+RC2 converts DISSENT into a single device-adaptive release for `procedural4.JTforME.com`.
 
-## The actual Grand Prix Mk IV is now the DISSENT ship
+## Complete mobile controls
 
-The previously recovered Grand Prix vehicle folder contained the full optimized payload after all:
+- Two analog virtual sticks for movement and aim.
+- Dedicated rise, descend, roll-left, and roll-right controls.
+- Hold-to-fire cannons.
+- Missile, boost, brake, scan, fitted-module, ledger, map, camera, pause, and fullscreen controls.
+- Multi-touch pointer handling with independent stick and button state.
+- Safe-area positioning for notches and rounded display edges.
+- Light haptic response where supported.
+- Screen wake lock during active mobile play where supported.
 
-- `model.json`
-- `lod0.bin`
-- `lod1.bin`
-- `lod2.bin`
-- credited source GLB
+## Fullscreen and orientation
 
-RC1 integrates the mobile/balanced LOD2 mesh directly into DISSENT. Its material groups are retained, the black paint can be recolored for the Iron Patriot variant, and the DISSENT conversion adds wings, guns, roll surfaces, and twin thrusters without altering the preserved source payload.
+- Fullscreen is requested from user interaction on phone launch and from a dedicated menu/game button.
+- Landscape orientation lock is requested where the browser exposes it.
+- The PWA manifest requests fullscreen landscape-primary presentation.
+- A same-origin service worker caches the core game shell for installed/offline replay after the first successful load.
+- Portrait gameplay displays a clear rotation gate.
+- iOS gracefully falls back to the full visual viewport and Home Screen installation guidance when general-page fullscreen is unavailable.
 
-The fallback procedural car remains in code for resilience, but it is no longer the normal ship.
+## Desktop resolution path
 
-## Final machines now look and behave differently
+- Added Adaptive Auto, Battery Saver, Balanced, Desktop High, and Desktop Ultra profiles.
+- Desktop Ultra supersamples standard-DPI displays and retains high-DPI/native 4K output within a guarded pixel budget.
+- Mobile Auto caps framebuffer cost independently from desktop quality.
+- Rendering distance, streamed architecture radius, particles, effects, fog, and resolution now follow the resolved device profile.
+- The menu reports input mode, resolved quality, internal framebuffer size, and fullscreen state.
 
-- **Rejection Engine:** giant mechanical stamp, redaction pressure, and close-range stamp impact.
-- **Grand Seal:** concentric rotating clauses and a late second shield.
-- **Gatekeeper:** monumental door frame, portal field, and reinforcement control.
-- **Null Tribunal:** fractured orbiting geometry and venue-transfer teleportation.
-- **Erasure Engine:** rotating shredder arms and direct record-integrity drain.
+## HUD adaptations
 
-## Relief can be granted without remaining granted
-
-Full campaign and Endless Appeal bosses now have a false-victory phase. The first apparent defeat restores the machine with new clauses, reinforcements, and the notice that the grant of relief has been vacated by a lower level of the same court.
-
-Quick mode remains quick and skips the reversal.
-
-## The descent has more authored spectacle
-
-- Opening ignition cinematic.
-- Circle reveal cards at major depths.
-- E-Filing Furnace and Infernal Bench transitions.
-- Final-order sequence.
-- Last-page pursuit during extraction.
-- Local checkpoint restoration sequence.
-
-## Runs can survive the browser closing
-
-- Automatic local checkpoints.
-- Resume button.
-- Version and generator compatibility validation.
-- Export/import of local progress in JSON.
-- No account or network service.
-
-## The game explains itself
-
-A four-page training brief introduces six-axis flight, weapons, evidence choices, the map, garage modules, final machines, and extraction. It is presented automatically on the first launch and remains available from the menu.
-
-## The Jetta now sounds alive
-
-The original synthesized score now includes:
-
-- Speed-reactive engine oscillator.
-- Afterburner pitch and gain response.
-- Procedural rhythmic pulses.
-- Different combat and boss timbres.
-- Existing event, weapon, impact, scan, and machine effects.
-
-No audio files are downloaded.
-
-## Result preservation and sharing
-
-- Copyable run summary and compact run code.
-- Downloadable 1200×630 PNG result card.
-- Local run history retained.
-
-## Accessibility
-
-High-contrast mode joins reduced motion, reduced flash, HUD scaling, inversion, sensitivity, quality controls, and independent music/SFX volume.
+- Mobile readouts move to a compact top strip.
+- Touch controls occupy the lower flight-deck area without covering health, energy, objective, or boss status.
+- Radar and desktop-only instruction surfaces are removed on small touch layouts.
+- Map and Ledger remain full overlays with explicit close controls.
 
 ## QA
 
+- Existing desktop campaign smoke suite: PASS.
+- Adaptive desktop/phone/portrait suite: PASS.
+- Browser fullscreen user-activation test: PASS.
 - 25,000 deterministic facilities: 0 failures.
-- Chromium WebGL2 smoke suite: PASS.
-- Authentic Grand Prix model detected: PASS.
-- Checkpoint save and resume: PASS.
-- False victory and actual boss defeat: PASS.
-- Result card render: PASS.
 - Console errors: 0.
 - Page errors: 0.
 
-## Remaining release-candidate work
-
-The code and packaging are release-candidate complete. A final 1.0 label should follow sustained human play on the intended physical hardware, final difficulty/audio tuning, and a production-domain smoke test after deployment.
+The authentic Grand Prix Mk IV integration, procedural campaign, Absurdity Director, Truth Ledger, final machines, false victory, extraction, checkpoints, portable progress, synthesized audio, and local result system remain intact.
